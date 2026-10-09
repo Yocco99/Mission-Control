@@ -21,6 +21,15 @@ git commit -am "Mission Control update $(date +%F)" && git push
 Drop the file in exactly as generated. The DeFi and Postcard dashboard links
 are added when the page is served, so the file never needs editing.
 
+## Two repos are involved
+
+- **This repo** holds the page content (`mission_control.html`) and the deploy
+  script. Weekly updates only touch this repo.
+- **Yocco99/eBay-Postcard-Pipeline** holds the Next.js app that serves it. The
+  home route lives there at `mission-control/src/app/route.ts` (committed in
+  d16a92c, replacing the old `page.tsx`). `deploy/route.ts` here is a copy of
+  it; keep the two in sync if you change either.
+
 ## How it is served
 
 ```
