@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mission Control</title>
+<script>
+  // Apply the saved theme before first paint so there's no flash.
+  try {
+    var savedTheme = localStorage.getItem('mc-theme');
+    if (savedTheme === 'light' || savedTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+  } catch (e) {}
+</script>
 <style>
   :root {
     --bg: #f5f6f8;
@@ -467,20 +476,17 @@
 <script>
   (function () {
     var btn = document.getElementById('themeToggle');
-    var state = null; // 'light' | 'dark' | null (follow system) — in-memory only, no persistence
+    var root = document.documentElement;
+    function currentTheme() {
+      var t = root.getAttribute('data-theme');
+      if (t === 'light' || t === 'dark') return t;
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    // Simple light/dark switch; the choice is remembered in this browser.
     btn.addEventListener('click', function () {
-      if (state === 'dark') {
-        state = 'light';
-      } else if (state === 'light') {
-        state = null;
-      } else {
-        state = 'dark';
-      }
-      if (state) {
-        document.documentElement.setAttribute('data-theme', state);
-      } else {
-        document.documentElement.removeAttribute('data-theme');
-      }
+      var next = currentTheme() === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('mc-theme', next); } catch (e) {}
     });
   })();
 </script>
