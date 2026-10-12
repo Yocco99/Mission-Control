@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mission Control</title>
 <script>
   // Apply the saved theme before first paint so there's no flash.
@@ -14,481 +14,362 @@
   } catch (e) {}
 </script>
 <style>
-  :root {
-    --bg: #f5f6f8;
-    --surface: #ffffff;
-    --surface-2: #eef0f3;
-    --text: #1b1f24;
-    --text-dim: #5b6370;
-    --border: #e1e4e9;
-    --accent: #2563eb;
-
-    --blue-bg: #eaf1ff;
-    --blue-border: #bcd4fb;
-    --blue-strong: #1d4ed8;
-    --blue-text: #1e3a8a;
-
-    --orange-bg: #fff2e6;
-    --orange-border: #ffd4a8;
-    --orange-strong: #c2550a;
-    --orange-text: #7c3a05;
-
-    --aqua-bg: #e6fbfa;
-    --aqua-border: #a9ece8;
-    --aqua-strong: #0f8e86;
-    --aqua-text: #0b5f59;
-
-    --yellow-bg: #fdf6df;
-    --yellow-border: #f0e0a0;
-    --yellow-strong: #9a7c05;
-    --yellow-text: #6b5703;
-
-    --shadow: 0 1px 2px rgba(20,22,26,0.05), 0 4px 14px rgba(20,22,26,0.06);
+  :root{
+    --bg:#f4f5f7; --surface:#ffffff; --surface-2:#f9fafb; --border:#e3e6ea;
+    --text:#1c2128; --text-dim:#5b6472; --text-faint:#8a92a0;
+    --blue:#2f6fed; --blue-bg:#eaf1ff; --blue-soft:#d7e6ff;
+    --orange:#e0742a; --orange-bg:#fdf1e7; --orange-soft:#f8ddc0;
+    --aqua:#0e9b8a; --aqua-bg:#e7f8f5; --aqua-soft:#c9ecE4;
+    --yellow:#c9972e; --yellow-bg:#fbf3df; --yellow-soft:#f1e0ad;
+    --shadow: 0 1px 2px rgba(20,22,30,.04), 0 2px 10px rgba(20,22,30,.05);
+    --radius:14px;
   }
-
-  :root[data-theme="dark"] {
-    --bg: #15171b;
-    --surface: #1d2025;
-    --surface-2: #242830;
-    --text: #e8eaed;
-    --text-dim: #9aa2ad;
-    --border: #2d313a;
-    --accent: #6d9bff;
-
-    --blue-bg: #16233f;
-    --blue-border: #2b4a8a;
-    --blue-strong: #7ea6ff;
-    --blue-text: #cfe0ff;
-
-    --orange-bg: #3a2714;
-    --orange-border: #7a4a16;
-    --orange-strong: #ffac5c;
-    --orange-text: #ffe0bd;
-
-    --aqua-bg: #0f2b29;
-    --aqua-border: #1f5f59;
-    --aqua-strong: #5fe0d6;
-    --aqua-text: #c3f3ef;
-
-    --yellow-bg: #332b0e;
-    --yellow-border: #6b591a;
-    --yellow-strong: #e8c84a;
-    --yellow-text: #f5e7ad;
-
-    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 20px rgba(0,0,0,0.35);
+  :root[data-theme="dark"]{
+    --bg:#15171c; --surface:#1d2026; --surface-2:#22252b; --border:#2c3038;
+    --text:#eef0f3; --text-dim:#a7adba; --text-faint:#747c8a;
+    --blue:#6fa0ff; --blue-bg:#1b2436; --blue-soft:#283655;
+    --orange:#f0985a; --orange-bg:#2a2118; --orange-soft:#473321;
+    --aqua:#4fd3bf; --aqua-bg:#132522; --aqua-soft:#1d3b36;
+    --yellow:#e0bb5c; --yellow-bg:#2a2619; --yellow-soft:#473c22;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.35);
   }
-
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #15171b;
-      --surface: #1d2025;
-      --surface-2: #242830;
-      --text: #e8eaed;
-      --text-dim: #9aa2ad;
-      --border: #2d313a;
-      --accent: #6d9bff;
-
-      --blue-bg: #16233f;
-      --blue-border: #2b4a8a;
-      --blue-strong: #7ea6ff;
-      --blue-text: #cfe0ff;
-
-      --orange-bg: #3a2714;
-      --orange-border: #7a4a16;
-      --orange-strong: #ffac5c;
-      --orange-text: #ffe0bd;
-
-      --aqua-bg: #0f2b29;
-      --aqua-border: #1f5f59;
-      --aqua-strong: #5fe0d6;
-      --aqua-text: #c3f3ef;
-
-      --yellow-bg: #332b0e;
-      --yellow-border: #6b591a;
-      --yellow-strong: #e8c84a;
-      --yellow-text: #f5e7ad;
-
-      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 20px rgba(0,0,0,0.35);
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#15171c; --surface:#1d2026; --surface-2:#22252b; --border:#2c3038;
+      --text:#eef0f3; --text-dim:#a7adba; --text-faint:#747c8a;
+      --blue:#6fa0ff; --blue-bg:#1b2436; --blue-soft:#283655;
+      --orange:#f0985a; --orange-bg:#2a2118; --orange-soft:#473321;
+      --aqua:#4fd3bf; --aqua-bg:#132522; --aqua-soft:#1d3b36;
+      --yellow:#e0bb5c; --yellow-bg:#2a2619; --yellow-soft:#473c22;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.35);
     }
   }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:28px 20px 56px;}
+  header{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:18px; flex-wrap:wrap;}
+  h1{font-size:26px; margin:0 0 4px; letter-spacing:-0.01em;}
+  .sub{color:var(--text-dim); font-size:14px; margin:0;}
+  .headctl{display:flex; align-items:center; gap:10px;}
+  .updated{font-size:12px; color:var(--text-faint); white-space:nowrap;}
+  .themebtn{
+    border:1px solid var(--border); background:var(--surface); color:var(--text);
+    border-radius:999px; padding:7px 14px; font-size:13px; cursor:pointer;
+    box-shadow:var(--shadow);
+  }
+  .vision{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:16px 20px; margin-bottom:22px;
+    display:grid; grid-template-columns:repeat(3,1fr); gap:18px;
+  }
+  .vision .item .label{font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-faint); margin-bottom:4px;}
+  .vision .item .val{font-size:14px; color:var(--text); line-height:1.4;}
+  .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px;}
+  @media (max-width:860px){ .grid{grid-template-columns:1fr;} .vision{grid-template-columns:1fr;} }
+  .card{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:18px 20px 20px; border-top:4px solid var(--accent);
+  }
+  .card.blue{--accent:var(--blue);}
+  .card.orange{--accent:var(--orange);}
+  .card.aqua{--accent:var(--aqua);}
+  .card.yellow{--accent:var(--yellow);}
+  .cardhead{display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;}
+  .tracktitle{font-size:16px; font-weight:650; display:flex; align-items:center; gap:8px;}
+  .dot{width:9px; height:9px; border-radius:50%; background:var(--accent); display:inline-block;}
+  .pill{font-size:11px; padding:3px 9px; border-radius:999px; font-weight:600; color:var(--accent);}
+  .card.blue .pill{background:var(--blue-bg);}
+  .card.orange .pill{background:var(--orange-bg);}
+  .card.aqua .pill{background:var(--aqua-bg);}
+  .card.yellow .pill{background:var(--yellow-bg);}
+  .northstar{font-size:13px; color:var(--text-dim); margin:4px 0 14px; line-height:1.5;}
+  .section{margin-bottom:12px;}
+  .section:last-child{margin-bottom:0;}
+  .sectitle{font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-faint); margin-bottom:6px; font-weight:650;}
+  .section ul{margin:0; padding-left:18px; font-size:13.5px; line-height:1.55; color:var(--text);}
+  .section li{margin-bottom:4px;}
+  .section li:last-child{margin-bottom:0;}
+  .today{display:flex; flex-wrap:wrap; gap:6px;}
+  .chip{
+    font-size:12.5px; padding:5px 10px; border-radius:8px; background:var(--surface-2);
+    border:1px solid var(--border); color:var(--text);
+  }
+  .card.blue .chip{border-color:var(--blue-soft);}
+  .card.orange .chip{border-color:var(--orange-soft);}
+  .card.aqua .chip{border-color:var(--aqua-soft);}
+  .card.yellow .chip{border-color:var(--yellow-soft);}
+  .note{font-size:12px; color:var(--text-faint); margin-top:10px; line-height:1.5;}
+  .full-row{grid-column:1 / -1;}
 
-  * { box-sizing: border-box; }
-
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
+  .backlog{margin-top:14px; border-top:1px dashed var(--border); padding-top:12px;}
+  .backlog summary{
+    cursor:pointer; font-size:12.5px; font-weight:650; color:var(--orange);
+    list-style:none; display:flex; align-items:center; gap:6px;
+  }
+  .backlog summary::-webkit-details-marker{display:none;}
+  .backlog summary::before{content:"▸"; font-size:11px; transition:transform .15s ease;}
+  .backlog[open] summary::before{transform:rotate(90deg);}
+  .backlog-stats{font-size:12px; color:var(--text-dim); margin:8px 0 10px;}
+  .arealist{display:flex; flex-direction:column; gap:4px; max-height:320px; overflow-y:auto; padding-right:4px;}
+  .area{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:7px 10px; border-radius:8px; background:var(--surface-2); font-size:12.5px;
+  }
+  .area.focus{outline:1px solid var(--orange); background:var(--orange-bg);}
+  .area .name{color:var(--text); flex:1; min-width:0;}
+  .area .count{color:var(--text-faint); font-size:11.5px; white-space:nowrap;}
+  .status-badge{font-size:10.5px; padding:2px 7px; border-radius:999px; font-weight:650; white-space:nowrap;}
+  .status-done{background:var(--aqua-bg); color:var(--aqua);}
+  .status-progress{background:var(--orange-bg); color:var(--orange);}
+  .status-notstarted{background:var(--surface); color:var(--text-faint); border:1px solid var(--border);}
+  .addnote{
+    margin-top:10px; font-size:11.5px; color:var(--text-faint); background:var(--surface-2);
+    border:1px dashed var(--border); border-radius:8px; padding:8px 10px; line-height:1.5;
   }
 
-  .wrap {
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 28px 20px 60px;
+  .recurring{
+    margin-top:22px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:16px 20px;
   }
-
-  header.top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+  .recurring h2{font-size:14px; margin:0 0 10px; display:flex; align-items:center; gap:8px;}
+  .recurring h2 .dot{background:var(--text-dim);}
+  .rlist{display:grid; grid-template-columns:repeat(2,1fr); gap:10px;}
+  @media (max-width:860px){ .rlist{grid-template-columns:1fr;} }
+  .ritem{font-size:13px; line-height:1.5; color:var(--text); display:flex; gap:8px;}
+  .ritem .tag{
+    flex-shrink:0; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em;
+    color:var(--text-faint); padding-top:2px; width:58px;
   }
-
-  header.top h1 {
-    font-size: 26px;
-    margin: 0 0 4px 0;
-    letter-spacing: -0.01em;
-  }
-
-  header.top .updated {
-    color: var(--text-dim);
-    font-size: 13px;
-  }
-
-  .theme-toggle {
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--text);
-    border-radius: 999px;
-    padding: 7px 14px;
-    font-size: 13px;
-    cursor: pointer;
-    box-shadow: var(--shadow);
-  }
-  .theme-toggle:hover { border-color: var(--accent); }
-
-  .vision {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    box-shadow: var(--shadow);
-    padding: 18px 22px;
-    margin-bottom: 24px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-  }
-
-  .vision .item .label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-dim);
-    margin-bottom: 4px;
-    font-weight: 600;
-  }
-  .vision .item .value {
-    font-size: 14.5px;
-    line-height: 1.45;
-  }
-
-  .tracks {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-    margin-bottom: 24px;
-  }
-
-  .card {
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-    padding: 20px 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .card.blue    { background: var(--blue-bg);   border-color: var(--blue-border); }
-  .card.orange  { background: var(--orange-bg); border-color: var(--orange-border); }
-  .card.aqua    { background: var(--aqua-bg);   border-color: var(--aqua-border); }
-  .card.yellow  { background: var(--yellow-bg); border-color: var(--yellow-border); }
-
-  .card .head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-  }
-
-  .card .head h2 {
-    margin: 0;
-    font-size: 17px;
-    letter-spacing: -0.01em;
-  }
-
-  .card.blue   .head h2 { color: var(--blue-text); }
-  .card.orange .head h2 { color: var(--orange-text); }
-  .card.aqua   .head h2 { color: var(--aqua-text); }
-  .card.yellow .head h2 { color: var(--yellow-text); }
-
-  .badge {
-    font-size: 10.5px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 3px 9px;
-    border-radius: 999px;
-    white-space: nowrap;
-  }
-  .card.blue   .badge { background: var(--blue-strong);   color: #fff; }
-  .card.orange .badge { background: var(--orange-strong); color: #fff; }
-  .card.aqua   .badge { background: var(--aqua-strong);   color: #06302c; }
-  .card.yellow .badge { background: var(--yellow-strong); color: #332900; }
-  .badge.steady { background: var(--surface-2); color: var(--text-dim); }
-
-  .card .north-star {
-    font-size: 12.5px;
-    color: var(--text-dim);
-    line-height: 1.5;
-  }
-
-  .section-label {
-    font-size: 10.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    font-weight: 700;
-    color: var(--text-dim);
-    margin: 2px 0 2px 0;
-  }
-
-  .card ul {
-    margin: 0;
-    padding-left: 18px;
-    font-size: 13.5px;
-    line-height: 1.55;
-  }
-  .card ul li { margin-bottom: 3px; }
-
-  .today-box {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 10px 14px;
-  }
-  .today-box .section-label { margin-bottom: 4px; }
-
-  .quarter-note {
-    font-size: 13px;
-    line-height: 1.5;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 10px 14px;
-  }
-
-  .recurring {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    box-shadow: var(--shadow);
-    padding: 18px 22px;
-  }
-
-  .recurring h2 {
-    margin: 0 0 12px 0;
-    font-size: 15px;
-    letter-spacing: -0.01em;
-  }
-
-  .recurring ul {
-    margin: 0;
-    padding-left: 0;
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px 22px;
-  }
-
-  .recurring li {
-    font-size: 13.5px;
-    line-height: 1.5;
-    padding-left: 18px;
-    position: relative;
-  }
-  .recurring li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 7px;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--accent);
-  }
-  .recurring li.new::after {
-    content: "new";
-    margin-left: 7px;
-    font-size: 9.5px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--accent);
-    letter-spacing: 0.04em;
-  }
-
-  @media (max-width: 860px) {
-    .tracks { grid-template-columns: 1fr; }
-    .vision { grid-template-columns: 1fr; }
-    .recurring ul { grid-template-columns: 1fr; }
-  }
+  footer{margin-top:22px; text-align:center; font-size:11.5px; color:var(--text-faint);}
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <header class="top">
-      <div>
-        <h1>Mission Control</h1>
-        <div class="updated">Last updated 2026-10-07 &middot; full check-in, all 4 tracks</div>
-      </div>
-      <button class="theme-toggle" id="themeToggle" type="button">Toggle theme</button>
-    </header>
+<div class="wrap">
 
-    <section class="vision">
-      <div class="item">
-        <div class="label">5 Years</div>
-        <div class="value">Completely debt-free.</div>
-      </div>
-      <div class="item">
-        <div class="label">10 Years</div>
-        <div class="value">Still debt-free, living off passive/semi-passive income from a side business and DeFi investing &mdash; no longer burdened by the need to work every day.</div>
-      </div>
-      <div class="item">
-        <div class="label">Short-Term Priority</div>
-        <div class="value">Stop the bleeding &mdash; get to not spending more than he earns, before available credit runs out.</div>
-      </div>
-    </section>
+  <header>
+    <div>
+      <h1>Mission Control</h1>
+      <p class="sub">Scott's weekly blueprint — recalibrated every Sunday</p>
+    </div>
+    <div class="headctl">
+      <span class="updated" id="updated">Last updated 2026-10-11</span>
+      <button class="themebtn" id="themeToggle" type="button">🌓 Theme</button>
+    </div>
+  </header>
 
-    <section class="tracks">
-
-      <!-- Track 1: Clutter / eBay Inventory -->
-      <div class="card blue">
-        <div class="head">
-          <h2>Clutter / eBay Inventory</h2>
-          <span class="badge">Track 1</span>
-        </div>
-        <div class="north-star">Clear the negative, cluttered atmosphere from unsold inventory; land on a real plan of attack for the postcard and sports-card ventures rather than letting them drift.</div>
-        <div class="quarter-note">
-          <div class="section-label">This Quarter</div>
-          Postcards in <strong>maintenance mode</strong> &mdash; steady daily listing through Oct/Nov feeding a December scale-vs-liquidate decision. Pre-1980s cards: pick a venue (FB vs. eBay); consignment auction ruled out on fees.
-        </div>
-        <div>
-          <div class="section-label">This Week's Blueprint</div>
-          <ul>
-            <li>Decide FB Marketplace vs. eBay for the remaining pre-1980s baseball cards.</li>
-            <li>Clean and list the Canon A-1 camera.</li>
-          </ul>
-        </div>
-        <div class="today-box">
-          <div class="section-label">Today</div>
-          <ul>
-            <li>Clean/prep the Canon A-1 camera for listing.</li>
-            <li>Weigh FB vs. eBay for the pre-1980s cards.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Track 2: Home Projects -->
-      <div class="card orange">
-        <div class="head">
-          <h2>Home Projects</h2>
-          <span class="badge">Track 2</span>
-        </div>
-        <div class="north-star">Keep steady, visible progress on the home project backlog &mdash; this matters deeply for his wife &mdash; without taking on more debt.</div>
-        <div class="quarter-note">
-          <div class="section-label">Backlog</div>
-          19 areas, ~97 tasks &mdash; this week's picks only; full list lives in the backlog doc. 2 tasks complete so far (pellet stove; door hinges).
-        </div>
-        <div>
-          <div class="section-label">This Week's Picks</div>
-          <ul>
-            <li>Build the soil/rock sifter, finish sifting rocks, place at the pole barn base (Area 19) &mdash; targeting Saturday 10/10.</li>
-          </ul>
-        </div>
-        <div class="today-box">
-          <div class="section-label">Today</div>
-          <ul>
-            <li>Line up materials/plan for the soil/rock sifter build ahead of Saturday.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Track 3: DeFi Investing -->
-      <div class="card aqua">
-        <div class="head">
-          <h2>DeFi Investing</h2>
-          <span class="badge">Track 3 &middot; Main focus</span>
-        </div>
-        <div class="north-star">Build a genuinely proven, repeatable DeFi investment process; grow DeFi passive income toward eventually replacing his SEI salary. Protective of core BTC/crypto holdings.</div>
-        <div class="quarter-note">
-          <div class="section-label">This Quarter</div>
-          Now Scott's main project focus. Building a self-contained owner-only vault + limited keeper version of the Maxfi/Snuggle tight-range rebalance logic, to cut out protocol fees and third-party/rug risk.
-        </div>
-        <div>
-          <div class="section-label">This Week's Blueprint</div>
-          <ul>
-            <li>Advance the Snuggle/Maxfi self-built vault build &mdash; details pending Scott's project update doc.</li>
-          </ul>
-        </div>
-        <div class="today-box">
-          <div class="section-label">Today</div>
-          <ul>
-            <li>DeFi learning block: continue Snuggle/Maxfi mechanics.</li>
-            <li>Review vault build status once the update doc is in hand.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Track 4: Day Job (SEI) -->
-      <div class="card yellow">
-        <div class="head">
-          <h2>Day Job (SEI)</h2>
-          <span class="badge steady">Steady state</span>
-        </div>
-        <div class="north-star">Keep delivering reliably at SEI &mdash; 20-year track record &mdash; this funds every other track. Also closing the AI-prompting skill gap (see Daily Recurring).</div>
-        <div class="quarter-note">
-          Needed for the foreseeable future (years) &mdash; no current project is far enough along to consider leaving it. No near-term plan to reduce hours or exit.
-        </div>
-        <div class="today-box">
-          <div class="section-label">Status</div>
-          <ul>
-            <li>Removed from the weekly blueprint rotation (2026-10-07) &mdash; stable, not asked about weekly. Resurfaces here only if something changes.</li>
-          </ul>
-        </div>
-      </div>
-
-    </section>
-
-    <section class="recurring">
-      <h2>Daily Recurring</h2>
-      <ul>
-        <li>Enter all bills/expenses in Quicken.</li>
-        <li>DeFi learning during commute (podcasts) &mdash; feeds Track 3.</li>
-        <li>AI learning block, 6:00 AM weekdays before work &mdash; live Claude session, feeds Track 4 skill gap.</li>
-        <li>Postcard listing &mdash; scan &amp; list ~25 cards, 5-6 days/week (~45-60 min) &mdash; feeds Track 1.</li>
-        <li class="new">Science of Getting Rich (Wattles) principles &mdash; Definite Ideal, gratitude, acting in the "Certain Way." Format still being worked out.</li>
-      </ul>
-    </section>
+  <div class="vision">
+    <div class="item">
+      <div class="label">5 Years</div>
+      <div class="val">Completely debt-free.</div>
+    </div>
+    <div class="item">
+      <div class="label">10 Years</div>
+      <div class="val">Still debt-free, living off passive/semi-passive income from a side business and DeFi — no longer burdened by having to work every day.</div>
+    </div>
+    <div class="item">
+      <div class="label">Right now</div>
+      <div class="val">Stop the bleeding — don't spend more than he earns, before available credit runs out.</div>
+    </div>
   </div>
 
+  <div class="grid">
+
+    <!-- Track 1: Clutter / eBay -->
+    <div class="card blue">
+      <div class="cardhead">
+        <div class="tracktitle"><span class="dot"></span>Clutter / eBay Inventory</div>
+        <span class="pill">Track 1</span>
+      </div>
+      <p class="northstar">Clear the cluttered atmosphere from unsold inventory; land on a real plan (execution or exit) for postcards and sports cards rather than letting them drift.</p>
+
+      <div class="section">
+        <div class="sectitle">This Quarter</div>
+        <ul>
+          <li>Finish moving remaining video game inventory (PS2/PS3/PS4/Xbox 360 — 10% price cut applied 10/11).</li>
+          <li>Postcards: maintenance mode through Oct–Nov for clean data. Decision point first week of Dec 2026 — scale, themed lots, or liquidate. Only 2 cards sold so far since daily production started; staying the course to Dec 4.</li>
+          <li>Pre-1980s baseball cards: FB vs. eBay venue decision still open.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="sectitle">This Week's Blueprint</div>
+        <ul>
+          <li>Clean and list the Canon A-1 camera (carried over).</li>
+          <li>List the last JFJ resurfacing machine on eBay — parts/non-functioning.</li>
+          <li>Decide FB vs. eBay for the pre-1980s cards and get the first batch listed.</li>
+          <li>Keep postcards at 25/day through the Dec 4 decision point.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="sectitle">Today</div>
+        <div class="today">
+          <span class="chip">Clean/prep Canon A-1</span>
+          <span class="chip">Decide FB vs. eBay — baseball cards</span>
+        </div>
+      </div>
+      <p class="note">Repurposing the Postcard Pipeline for baseball cards is on the table as a Dec 4 decision-point option — not a pivot to make before the test finishes.</p>
+    </div>
+
+    <!-- Track 2: Home Projects -->
+    <div class="card orange">
+      <div class="cardhead">
+        <div class="tracktitle"><span class="dot"></span>Home Projects</div>
+        <span class="pill">Track 2</span>
+      </div>
+      <p class="northstar">Keep steady, visible progress on the home project backlog — matters deeply for his wife — without taking on more debt.</p>
+
+      <div class="section">
+        <div class="sectitle">This Week's Pick</div>
+        <ul>
+          <li>Finish sifting decorative stone, place at the pole barn base (Area 19) — carried over, slower than expected. Staying heads-down on just this through the week and weekend.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="sectitle">Today</div>
+        <div class="today">
+          <span class="chip">Continue sifting decorative stone</span>
+        </div>
+      </div>
+
+      <div class="backlog">
+        <details id="backlogDetails">
+          <summary>Full backlog — 19 areas <span id="backlogSummaryCount"></span></summary>
+          <div class="backlog-stats" id="backlogStats"></div>
+          <div class="arealist" id="areaList"></div>
+          <div class="addnote">To add a new area or task, tell Claude at the next check-in — it gets added to the backlog doc and shows up here next update.</div>
+        </details>
+      </div>
+    </div>
+
+    <!-- Track 3: DeFi -->
+    <div class="card aqua">
+      <div class="cardhead">
+        <div class="tracktitle"><span class="dot"></span>DeFi Investing</div>
+        <span class="pill">Track 3</span>
+      </div>
+      <p class="northstar">Build a genuinely proven, repeatable DeFi process; grow passive income toward eventually replacing the SEI salary. Protective of core holdings — measured risk, not reckless.</p>
+
+      <div class="section">
+        <div class="sectitle">This Quarter</div>
+        <ul>
+          <li><strong>Top development priority.</strong> Self-built owner-only vault + limited keeper (Maxfi/Snuggle-style tight-range rebalance, partial fee compounding) to cut out protocol fees and third-party/rug risk.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="sectitle">This Week's Blueprint</div>
+        <ul>
+          <li>Continue the vault/keeper build with Claude Code — finish remaining programming.</li>
+          <li>Before real capital: fork/testnet testing of edge cases, plus an independent review by a separate Claude Code session.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="sectitle">Today</div>
+        <div class="today">
+          <span class="chip">DeFi learning block</span>
+          <span class="chip">Vault programming session</span>
+        </div>
+      </div>
+      <p class="note">Weekend build push happened 10/10–10/11; more programming still needed. Working through it with Claude over the coming week(s).</p>
+    </div>
+
+    <!-- Track 4: Day Job -->
+    <div class="card yellow">
+      <div class="cardhead">
+        <div class="tracktitle"><span class="dot"></span>Day Job (SEI)</div>
+        <span class="pill">Track 4</span>
+      </div>
+      <p class="northstar">Keep delivering reliably at SEI — a 20-year track record of being the person people bring problems to. This funds every other track.</p>
+
+      <div class="section">
+        <div class="sectitle">Status</div>
+        <ul>
+          <li>Steady-state. Off the weekly blueprint rotation since 2026-10-07 — stable, not expected to change soon. Will resurface here only if something actually shifts.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="recurring">
+    <h2><span class="dot"></span>Daily Recurring</h2>
+    <div class="rlist">
+      <div class="ritem"><span class="tag">Finance</span>Enter all bills/expenses in Quicken, every day.</div>
+      <div class="ritem"><span class="tag">DeFi</span>DeFi learning during the commute (podcasts) — feeds Track 3.</div>
+      <div class="ritem"><span class="tag">AI</span>AI learning block, 6:00 AM weekdays before work — live session with Claude, not passive. Feeds the Track 4 prompting skill gap.</div>
+      <div class="ritem"><span class="tag">Postcards</span>~25 cards scanned/listed via the OpenClaw postcards agent, 5–6 days/week. Feeds Track 1.</div>
+      <div class="ritem"><span class="tag">Mindset</span><strong>Locked in 2026-10-11:</strong> Science of Getting Rich practice, paired with the 6 AM block — restate the Definite Ideal, name three gratitudes, set a one-line "Certain Way" intention for the day.</div>
+    </div>
+  </div>
+
+  <footer>Dashboard reflects claude/mission_control.md as of the latest Sunday check-in.</footer>
+</div>
+
 <script>
-  (function () {
-    var btn = document.getElementById('themeToggle');
-    var root = document.documentElement;
-    function currentTheme() {
-      var t = root.getAttribute('data-theme');
-      if (t === 'light' || t === 'dark') return t;
-      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    // Simple light/dark switch; the choice is remembered in this browser.
-    btn.addEventListener('click', function () {
-      var next = currentTheme() === 'dark' ? 'light' : 'dark';
-      root.setAttribute('data-theme', next);
-      try { localStorage.setItem('mc-theme', next); } catch (e) {}
-    });
-  })();
+(function(){
+  var btn = document.getElementById('themeToggle');
+  btn.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme');
+    var isDark = cur ? cur === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var next = isDark ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try{ localStorage.setItem('mc-theme', next); }catch(e){}
+  });
+})();
+
+(function(){
+  var AREAS = [
+    {n:1,  name:"Upstairs Bath",                         total:5,  done:0, focus:false},
+    {n:2,  name:"Upstairs Bedroom",                       total:6,  done:0, focus:false},
+    {n:3,  name:"Upstairs Landing",                       total:2,  done:0, focus:false},
+    {n:4,  name:"Stairs",                                 total:2,  done:0, focus:false},
+    {n:5,  name:"Family Room",                            total:5,  done:1, focus:false},
+    {n:6,  name:"Dining Room",                            total:3,  done:0, focus:false},
+    {n:7,  name:"Kitchen",                                total:4,  done:0, focus:false},
+    {n:8,  name:"Sitting Room",                           total:6,  done:0, focus:false},
+    {n:9,  name:"Spare Bedroom",                          total:7,  done:0, focus:false},
+    {n:10, name:"Main Level Bath",                        total:6,  done:0, focus:false},
+    {n:11, name:"1st/2nd Floor General",                  total:2,  done:0, focus:false},
+    {n:12, name:"Downstairs Family Room & Hallway",       total:6,  done:0, focus:false},
+    {n:13, name:"Downstairs Office",                      total:6,  done:0, focus:false},
+    {n:14, name:"Downstairs Steps",                       total:1,  done:0, focus:false},
+    {n:15, name:"Downstairs Bath",                        total:3,  done:0, focus:false},
+    {n:16, name:"Laundry & Utility Rooms",                total:2,  done:1, focus:false},
+    {n:17, name:"Shed",                                   total:4,  done:0, focus:false},
+    {n:18, name:"Pole Barn",                               total:4,  done:0, focus:false},
+    {n:19, name:"Outdoor Projects",                       total:11, done:0, focus:true}
+  ];
+
+  var totalTasks = 0, doneTasks = 0, activeAreas = 0;
+  var listEl = document.getElementById('areaList');
+  AREAS.forEach(function(a){
+    totalTasks += a.total; doneTasks += a.done;
+    var status, statusClass;
+    if(a.done >= a.total){ status = "Done"; statusClass = "status-done"; }
+    else if(a.done > 0 || a.focus){ status = "In Progress"; statusClass = "status-progress"; activeAreas++; }
+    else { status = "Not Started"; statusClass = "status-notstarted"; }
+
+    var row = document.createElement('div');
+    row.className = 'area' + (a.focus ? ' focus' : '');
+    row.innerHTML =
+      '<span class="name">' + a.n + '. ' + a.name + (a.focus ? ' — current focus' : '') + '</span>' +
+      '<span class="count">' + a.done + '/' + a.total + '</span>' +
+      '<span class="status-badge ' + statusClass + '">' + status + '</span>';
+    listEl.appendChild(row);
+  });
+
+  document.getElementById('backlogSummaryCount').textContent =
+    '(' + doneTasks + '/' + totalTasks + ' tasks done · ' + activeAreas + ' active)';
+  document.getElementById('backlogStats').textContent =
+    doneTasks + ' of ' + totalTasks + ' tasks complete across 19 areas. Full detail lives in claude/home_projects_backlog.md.';
+})();
 </script>
 </body>
 </html>
